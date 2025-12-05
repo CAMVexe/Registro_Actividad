@@ -1,4 +1,5 @@
 ﻿@model IEnumerable<Registro_Actividad.Models.Persona>
+
 ﻿@{
     ViewData["Title"] = "Personas registradas";
 }
@@ -13,7 +14,7 @@
 }
 
 <p>
-    <a class="btn btn-primary" asp-controller="Personas" asp-action="Create">Nueva persona</a>
+    <a class="btn btn-primary" asp-controller="Personas" asp-action="Create">Registrar persona</a>
 </p>
 
 @if (!Model.Any())
@@ -47,4 +48,49 @@ else
             }
         </tbody>
     </table>
+    
+    <br />
+    <hr />
+    <br />
+
+    <h3>Buscar persona por nombre</h3>
+    <form asp-action="BuscarN" method="post">
+        <div class="mb-3">
+        <label for="nombre">Nombre</label>
+        <input id="nombre" name="nombre" type="text" placeholder="Recomendado antes de eliminar" />
+    </div>
+        <button type="submit" class="btn btn-success">Buscar</button>
+
+        <a class="btn btn-secondary" asp-action="Index">Limpiar</a>
+    </form>
+
+    <br />
+    <hr />
+    <br />
+
+    <h3>Buscar persona por nombre</h3>
+    <form asp-action="BuscarE" method="post">
+        <div class="mb-3">
+            <label for="edad">Edad</label>
+            <input id="edad" name="edad" type="number" placeholder="Recomendado antes de eliminar"/>
+        </div>
+        <button type="submit" class="btn btn-success">Buscar</button>
+
+        <a class="btn btn-secondary" asp-action="Index">Limpiar</a>
+    </form>
+
+    <br />
+    <hr />
+    <br />
+
+    <h3>Eliminar persona por cédula</h3>
+    <form asp-action="Delete" method="post">
+        <div class="mb-3">
+            <label for="cedula">Cedula</label>
+            <input id="cedula" name="cedula" type="number" placeholder="Por favor busque antes la persona para asegurarse" />
+        </div>
+        <button type="submit" class="btn btn-success">Eliminar</button>
+
+        <a class="btn btn-secondary" asp-action="Index">Limpiar</a>
+    </form>
 }

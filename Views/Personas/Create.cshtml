@@ -12,7 +12,7 @@
     @* cedula *@
     <div class="mb-3">
         <label asp-for="Cedula" class="form-label"></label>
-        <input asp-for="Cedula" class="form-control" />
+        <input asp-for="Cedula" class="form-control" placeholder="sin espacios, ej: 102340567" />
         <span asp-validation-for="Cedula" class="text-danger"></span>
     </div>
 
@@ -40,7 +40,7 @@
     @* telefono *@
     <div class="mb-3">
         <label asp-for="Telefono" class="form-label"></label>
-        <input asp-for="Telefono" class="form-control" />
+        <input asp-for="Telefono" class="form-control" placeholder="sin espacios, ej: 12345678" />
         <span asp-validation-for="Telefono" class="text-danger"></span>
     </div>
 
@@ -51,7 +51,7 @@
         <span asp-validation-for="Email" class="text-danger"></span>
     </div>
 
-    <button type="submit" class="btn btn-success">Agregar</button>
+    <button type="submit" class="btn btn-success">Registrar</button>
 
     <a class="btn btn-secondary" asp-action="Index">Volver</a>
 </form>

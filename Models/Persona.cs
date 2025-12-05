@@ -7,15 +7,15 @@ namespace Registro_Actividad.Models;
 public partial class Persona
 {
     [Required(ErrorMessage = "Para poder agregar a la persona es necesario ingresar el número de cédula")]
-    [Range(10000000, 99999999, ErrorMessage = "El formato de la cédula debe ser con 0 y sin espacios")]
+    [RegularExpression(@"^\d0\d{3}0\d{3}$", ErrorMessage = "El formato de la cédula debe ser con 0 y sin espacios")]
     public int Cedula { get; set; }
 
     [Required(ErrorMessage = "Para poder agregar a la persona es necesario ingresar el nombre")]
-    [StringLength(3, ErrorMessage = "El nombre debe tener al menos 3 caracteres")]
+    [MinLength(3, ErrorMessage = "El nombre debe tener al menos 3 caracteres")]
     public string? Nombre { get; set; }
 
     [Required(ErrorMessage = "Para poder agregar a la persona es necesario ingresar los apellidos")]
-    [StringLength(3, ErrorMessage = "El apellido debe tener al menos 3 caracteres")]
+    [MinLength(3, ErrorMessage = "El apellido debe tener al menos 3 caracteres")]
     public string? Apellidos { get; set; }
 
     [Required(ErrorMessage = "Para poder agregar a la persona es necesario ingresar la edad")]
