@@ -35,8 +35,8 @@ namespace Registro_Actividad.Controllers
             return RedirectToAction(nameof(Index));
         }
 
+        // Buscar por nombre
         [HttpPost]
-        [ValidateAntiForgeryToken]
         public IActionResult BuscarN(string nombre)
         {
             var resultado = _context.Personas.Where(p => p.Nombre.Contains(nombre)).ToList();
@@ -83,7 +83,7 @@ namespace Registro_Actividad.Controllers
         }
 
         // GET: mostrar el formulario de edición
-        [HttpGet]
+        
         public IActionResult Edit(int cedula)
         {
             var current = _context.Personas.Find(cedula);
@@ -112,11 +112,25 @@ namespace Registro_Actividad.Controllers
                 return RedirectToAction(nameof(Index));
             }
 
-            // Actualiza los valores y guarda
-            _context.Entry(existing).CurrentValues.SetValues(model);
+            _context.Entry(existing).CurrentValues.SetValues(model); // Entry(r) = obtiene registro r | CurrentValues = valores actuales del registro | SetValues(m) = asigna los valores del modelo m
             _context.SaveChanges();
 
             TempData["Mensaje"] = $"Persona '{model.Nombre}' actualizada correctamente.";
+            return RedirectToAction(nameof(Index));
+        }
+
+        // Consultas LINQ
+
+        public IActionResult OrderN()
+        {
+            var ordered = _context.Personas.OrderBy(p => p.Nombre).ToList();
+            return View("Index", ordered);
+        }
+
+        public IActionResult AgeAvg()
+        {
+            var avgAge = _context.Personas.Average(p => p.Edad);
+            TempData["Mensaje"] = $"La edad promedio es {avgAge:F2} años.";
             return RedirectToAction(nameof(Index));
         }
     }
