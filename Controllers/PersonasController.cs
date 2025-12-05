@@ -24,7 +24,7 @@ namespace Registro_Actividad.Controllers
         [HttpPost]
         public IActionResult Create(Persona model)
         {
-            if (ModelState.IsValid)
+            if (!ModelState.IsValid)
             {
                 return View(model);
             }

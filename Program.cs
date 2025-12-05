@@ -1,3 +1,6 @@
+using Microsoft.EntityFrameworkCore;
+using Registro_Actividad.Models;
+
 namespace Registro_Actividad
 {
     public class Program
@@ -5,6 +8,10 @@ namespace Registro_Actividad
         public static void Main(string[] args)
         {
             var builder = WebApplication.CreateBuilder(args);
+
+            // Registrar el DbContext en el contenedor DI
+            builder.Services.AddDbContext<PeopleContext>(options =>
+                options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
             // Add services to the container.
             builder.Services.AddControllersWithViews();
