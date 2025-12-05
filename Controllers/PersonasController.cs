@@ -32,6 +32,7 @@ namespace Registro_Actividad.Controllers
             _context.SaveChanges();
 
             TempData["Mensaje"] = $"Persona '{model.Nombre}' registrada correctamente.";
+            TempData["Tipo"] = "success";
             return RedirectToAction(nameof(Index));
         }
 
@@ -44,6 +45,7 @@ namespace Registro_Actividad.Controllers
             if (resultado.Count == 0)
             {
                 TempData["Mensaje"] = $"No se encontraron personas con el nombre '{nombre}'.";
+                TempData["Tipo"] = "warning";
                 return RedirectToAction(nameof(Index));
             }
 
@@ -58,6 +60,7 @@ namespace Registro_Actividad.Controllers
             if (match.Count == 0)
             {
                 TempData["Mensaje"] = $"No se encontraron personas con {edad} años de edad.";
+                TempData["Tipo"] = "warning";
                 return RedirectToAction(nameof(Index));
             }
 
@@ -72,6 +75,7 @@ namespace Registro_Actividad.Controllers
             if (persona == null)
             {
                 TempData["Mensaje"] = $"No se encontró la persona con cédula {cedula}.";
+                TempData["Tipo"] = "warning";
                 return RedirectToAction(nameof(Index));
             }
 
@@ -79,6 +83,7 @@ namespace Registro_Actividad.Controllers
             _context.SaveChanges();
 
             TempData["Mensaje"] = $"Persona con cédula {cedula} eliminada correctamente.";
+            TempData["Tipo"] = "success";
             return RedirectToAction(nameof(Index));
         }
 
@@ -90,6 +95,7 @@ namespace Registro_Actividad.Controllers
             if (current == null)
             {
                 TempData["Mensaje"] = $"No se encontró la persona con cédula {cedula}.";
+                TempData["Tipo"] = "warning";
                 return RedirectToAction(nameof(Index));
             }
 
@@ -109,6 +115,7 @@ namespace Registro_Actividad.Controllers
             if (existing == null)
             {
                 TempData["Mensaje"] = $"No se encontró la persona con cédula {model.Cedula}.";
+                TempData["Tipo"] = "warning";
                 return RedirectToAction(nameof(Index));
             }
 
@@ -116,6 +123,7 @@ namespace Registro_Actividad.Controllers
             _context.SaveChanges();
 
             TempData["Mensaje"] = $"Persona '{model.Nombre}' actualizada correctamente.";
+            TempData["MensajeTipo"] = "success";
             return RedirectToAction(nameof(Index));
         }
 
@@ -131,6 +139,7 @@ namespace Registro_Actividad.Controllers
         {
             var avgAge = _context.Personas.Average(p => p.Edad);
             TempData["Mensaje"] = $"La edad promedio es {avgAge:F2} años.";
+            TempData["Tipo"] = "success";
             return RedirectToAction(nameof(Index));
         }
     }

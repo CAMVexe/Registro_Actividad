@@ -2,19 +2,23 @@
 
 ﻿@{
     ViewData["Title"] = "Personas registradas";
+    var msg = TempData["Mensaje"] as string;
+    var tipo = (TempData["Tipo"] as string) ?? "success";
 }
 
 <h1>@ViewData["Title"]</h1>
 
-@if (TempData["Mensaje"] is string msg)
+@if (!string.IsNullOrEmpty(msg))
 {
-    <div class="alert alert-success" role="alert" >
+    <div class="alert alert-@tipo" role="alert">
         @msg
     </div>
 }
 
 <p>
-    <a class="btn btn-primary" asp-controller="Personas" asp-action="Create">Registrar persona</a>
+    <a class="btn btn-primary" asp-controller="Personas" asp-action="Create">
+        <i class="bi bi-person-plus me-2"></i>Registrar persona
+    </a>
 </p>
 
 @if (!Model.Any())
@@ -53,65 +57,69 @@ else
     <hr />
     <br />
 
-    <h3>Buscar persona por nombre</h3>
-    <form asp-action="BuscarN" method="post">
-        <div class="mb-3">
-        <label for="nombre">Nombre</label>
-        <input id="nombre" name="nombre" type="text" placeholder="Recomendado antes de eliminar" />
+    <div class="row">
+        <div class="col-md-6">
+            <h3>Buscar persona por nombre</h3>
+            <form asp-action="BuscarN" method="post">
+                <div class="mb-3">
+                    <label for="nombre">Nombre</label>
+                    <input id="nombre" name="nombre" type="text" class="form-control" placeholder="Recomendado antes de eliminar" />
+                </div>
+                <button type="submit" class="btn btn-success"><i class="bi bi-search me-2"></i>Buscar</button>
+                <a class="btn btn-secondary" asp-action="Index"><i class="bi bi-arrow-clockwise me-2"></i>Limpiar</a>
+            </form>
+        </div>
+
+        <div class="col-md-6">
+            <h3>Buscar persona por edad</h3>
+            <form asp-action="BuscarE" method="post">
+                <div class="mb-3">
+                    <label for="edad">Edad</label>
+                    <input id="edad" name="edad" type="number" class="form-control" placeholder="Recomendado antes de eliminar"/>
+                </div>
+                <button type="submit" class="btn btn-success"><i class="bi bi-search me-2"></i>Buscar</button>
+                <a class="btn btn-secondary" asp-action="Index"><i class="bi bi-arrow-clockwise me-2"></i>Limpiar</a>
+            </form>
+        </div>
     </div>
-        <button type="submit" class="btn btn-success">Buscar</button>
-
-        <a class="btn btn-secondary" asp-action="Index">Limpiar</a>
-    </form>
 
     <br />
     <hr />
     <br />
 
-    <h3>Buscar persona por nombre</h3>
-    <form asp-action="BuscarE" method="post">
-        <div class="mb-3">
-            <label for="edad">Edad</label>
-            <input id="edad" name="edad" type="number" placeholder="Recomendado antes de eliminar"/>
+    <div class="row">
+        <div class="col-md-6">
+            <h3>Eliminar persona por cédula</h3>
+            <form asp-action="Delete" method="post">
+                <div class="mb-3">
+                    <label for="cedulaEliminar">Cedula</label>
+                    <input id="cedulaEliminar" name="cedula" type="number" class="form-control" placeholder="Por favor busque antes la persona para asegurarse" />
+                </div>
+                <button type="submit" class="btn btn-danger"><i class="bi bi-trash me-2"></i>Eliminar</button>
+            </form>
         </div>
-        <button type="submit" class="btn btn-success">Buscar</button>
 
-        <a class="btn btn-secondary" asp-action="Index">Limpiar</a>
-    </form>
-
-    <br />
-    <hr />
-    <br />
-
-    <h3>Eliminar persona por cédula</h3>
-    <form asp-action="Delete" method="post">
-        <div class="mb-3">
-            <label for="cedula">Cedula</label>
-            <input id="cedula" name="cedula" type="number" placeholder="Por favor busque antes la persona para asegurarse" />
+        <div class="col-md-6">
+            <h3>Actualizar persona por cédula</h3>
+            <form asp-action="Edit" method="get">
+                <div class="mb-3">
+                    <label for="cedulaActualizar">Cedula</label>
+                    <input id="cedulaActualizar" name="cedula" type="number" class="form-control" placeholder="Sin espacios, ej: 102340567" />
+                </div>
+                <button type="submit" class="btn btn-success"><i class="bi bi-pencil me-2"></i>Actualizar</button>
+            </form>
         </div>
-        <button type="submit" class="btn btn-success">Eliminar</button>
+    </div>
 
-        <a class="btn btn-secondary" asp-action="Index">Limpiar</a>
-    </form>
-
-    <br />
     <hr />
     <br />
 
-    <h3>Actualizar persona por cédula</h3>
-    <form asp-action="Edit" method="get">
-        <div class="mb-3">
-            <label for="cedula">Cedula</label>
-            <input id="cedula" name="cedula" type="number" placeholder="Por favor busque antes la persona para asegurarse" />
+    <div class="row">
+        <div class="col-md-6 d-flex align-items-center">
+            <a class="btn btn-secondary w-100" asp-action="OrderN"><i class="bi bi-sort-alpha-down me-2"></i>Ordenar por nombre</a>
         </div>
-        <button type="submit" class="btn btn-success">Actualizar</button>
-        <a class="btn btn-secondary" asp-action="Index">Limpiar</a>
-    </form>
-
-    <hr />
-    <br />
-
-    <a class="btn btn-secondary" asp-action="OrderN">Ordenar por nombre</a>
-
-    <a class="btn btn-secondary" asp-action="AgeAvg">Promedio de edad</a>
+        <div class="col-md-6 d-flex align-items-center">
+            <a class="btn btn-secondary w-100" asp-action="AgeAvg"><i class="bi bi-bar-chart-line me-2"></i>Promedio de edad</a>
+        </div>
+    </div>
 }

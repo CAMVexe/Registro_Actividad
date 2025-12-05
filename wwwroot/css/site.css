@@ -29,3 +29,203 @@ body {
 .form-floating > .form-control-plaintext:focus::placeholder, .form-floating > .form-control:focus::placeholder {
   text-align: start;
 }
+
+:root{
+  --bg: #071028;
+  --card: #0b1630;
+  --primary: #2563eb;    /* azul principal */
+  --secondary: #06b6d4;  /* acento cyan */
+  --accent: #f97316;     /* naranja */
+  --success: #10b981;    /* verde */
+  --danger: #ef4444;     /* rojo */
+  --text: #e6eef8;
+  --muted: rgba(230,238,248,0.6);
+}
+
+/* Layout */
+body {
+  background: linear-gradient(180deg, var(--bg), #031029 80%);
+  color: var(--text);
+  font-family: "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+}
+
+/* Títulos */
+h1 {
+  color: var(--secondary);
+  font-weight: 600;
+  letter-spacing: 0.2px;
+}
+
+/* Tablas - mantener tema oscuro pero más suave */
+.table {
+  background: transparent;
+  color: var(--text);
+}
+.table thead th {
+  color: var(--secondary);
+  border-bottom: 1px solid rgba(255,255,255,0.06);
+}
+.table tbody td {
+  vertical-align: middle;
+  color: var(--muted);
+}
+
+/* Formularios */
+.form-control {
+  background-color: rgba(255,255,255,0.02);
+  border: 1px solid rgba(255,255,255,0.06);
+  color: var(--text);
+  transition: border-color .15s ease, box-shadow .15s ease;
+  border-radius: 0.5rem;
+}
+.form-control:focus {
+  border-color: var(--secondary);
+  box-shadow: 0 0 0 0.15rem rgba(6,182,212,0.12);
+  outline: none;
+}
+
+/* Alertas */
+.alert {
+  border-radius: 0.75rem;
+  box-shadow: 0 4px 18px rgba(2,6,23,0.6);
+  font-weight: 500;
+}
+.alert-success {
+  background: linear-gradient(90deg, rgba(16,185,129,0.12), rgba(16,185,129,0.06));
+  color: var(--success);
+  border: 1px solid rgba(16,185,129,0.18);
+}
+.alert-danger {
+  background: linear-gradient(90deg, rgba(239,68,68,0.12), rgba(239,68,68,0.06));
+  color: var(--danger);
+  border: 1px solid rgba(239,68,68,0.18);
+}
+
+/* Botones: formas "pill", sombras y gradientes suaves */
+.btn {
+  border-radius: 999px; /* pill */
+  padding: .45rem 1.15rem;
+  font-weight: 600;
+  letter-spacing: .2px;
+  box-shadow: 0 6px 18px rgba(2,6,23,0.45);
+  transition: transform .08s ease, box-shadow .12s ease, opacity .12s ease;
+  border: none;
+}
+.btn:active { transform: translateY(1px) scale(.998); }
+.btn:focus { box-shadow: 0 8px 22px rgba(2,6,23,0.55), 0 0 0 0.18rem rgba(6,182,212,0.12); outline: none; }
+
+/* Variantes */
+.btn-primary {
+  background: linear-gradient(90deg, var(--primary), #4f46e5);
+  color: #fff;
+}
+.btn-secondary {
+  background: linear-gradient(90deg, #334155, #1f2937);
+  color: #fff;
+}
+.btn-success {
+  background: linear-gradient(90deg, #10b981, #059669);
+  color: #042014;
+}
+.btn-danger {
+  background: linear-gradient(90deg, #ef4444, #dc2626);
+  color: #fff;
+}
+
+/* Botones de ancho completo en columnas */
+.btn.w-100 {
+  padding-left: 1.25rem;
+  padding-right: 1.25rem;
+}
+
+/* Pequeños ajustes visuales */
+.mb-3 label {
+  color: var(--muted);
+  font-weight: 600;
+}
+hr {
+  border-top: 1px solid rgba(255,255,255,0.04);
+}
+a.btn-secondary {
+  opacity: 0.95;
+}
+
+/* ===== Ajustes solicitados: footer y placeholders blancos ===== */
+
+/* Forzar texto del footer en blanco, también enlaces y texto pequeño */
+footer,
+.footer,
+footer .text-muted,
+.footer .text-muted,
+footer small,
+.footer small,
+footer p,
+.footer p {
+  color: #ffffff !important;
+}
+footer a,
+.footer a {
+  color: #ffffff !important;
+  text-decoration: underline;
+  opacity: 0.95;
+}
+
+/* Placeholder: hacerlos blancos y visibles (soporte cross-browser) */
+.form-control::placeholder {
+  color: rgba(255,255,255,0.75);
+  opacity: 1;
+}
+.form-control::-webkit-input-placeholder { /* Chrome/Opera/Safari */
+  color: rgba(255,255,255,0.75);
+  opacity: 1;
+}
+.form-control::-moz-placeholder { /* Firefox 19+ */
+  color: rgba(255,255,255,0.75);
+  opacity: 1;
+}
+.form-control:-ms-input-placeholder { /* IE 10+ */
+  color: rgba(255,255,255,0.75);
+  opacity: 1;
+}
+.form-control::-ms-input-placeholder { /* Edge */
+  color: rgba(255,255,255,0.75);
+  opacity: 1;
+}
+
+/* También sobrescribir reglas de form-floating placeholder si existen */
+.form-floating > .form-control::placeholder,
+.form-floating > .form-control-plaintext::placeholder {
+  color: rgba(255,255,255,0.65) !important;
+  text-align: start;
+}
+
+/* Navbar personalizado: combina con paleta existente */
+.navbar {
+  background: linear-gradient(90deg, var(--card), rgba(6,182,212,0.04));
+  border-bottom: 1px solid rgba(255,255,255,0.04);
+}
+.navbar, .navbar .container, .navbar .navbar-collapse {
+  backdrop-filter: blur(4px);
+}
+.navbar .navbar-brand,
+.navbar .nav-link {
+  color: var(--text) !important;
+  font-weight: 600;
+}
+.navbar .nav-link:hover {
+  color: var(--secondary) !important;
+}
+
+/* Toggler icon para tema oscuro (si usas svg o iconos predeterminados puede necesitar ajuste) */
+.navbar-toggler {
+  border-color: rgba(255,255,255,0.06);
+}
+.navbar-toggler-icon {
+  filter: invert(1) sepia(0.2) saturate(3) hue-rotate(160deg);
+}
+
+/* Iconos dentro de botones: tamaño y separación */
+.btn i.bi {
+  font-size: 1.02rem;
+  vertical-align: -0.05em;
+}
