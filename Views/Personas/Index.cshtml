@@ -1,0 +1,50 @@
+﻿@model IEnumerable<Registro_Actividad.Models.Persona>
+﻿@{
+    ViewData["Title"] = "Personas registradas";
+}
+
+<h1>@ViewData["Title"]</h1>
+
+@if (TempData["Mensaje"] is string msg)
+{
+    <div class="alert alert-success" role="alert" >
+        @msg
+    </div>
+}
+
+<p>
+    <a class="btn btn-primary" asp-controller="Personas" asp-action="Create">Nueva persona</a>
+</p>
+
+@if (!Model.Any())
+{
+    <p>No hay personas registradas aun</p>
+}
+else
+{
+    <table class="table table-dark table-striped">
+        <thead>
+            <tr>
+                <th>Cedula</th>
+                <th>Nombre</th>
+                <th>Apellidos</th>
+                <th>Edad</th>
+                <th>Telefono</th>
+                <th>Email</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var r in Model)
+            {
+                <tr>
+                    <td>@r.Cedula</td>
+                    <td>@r.Nombre</td>
+                    <td>@r.Apellidos</td>
+                    <td>@r.Edad</td>
+                    <td>@r.Telefono</td>
+                    <td>@r.Email</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
