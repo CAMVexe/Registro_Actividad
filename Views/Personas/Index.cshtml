@@ -93,4 +93,18 @@ else
 
         <a class="btn btn-secondary" asp-action="Index">Limpiar</a>
     </form>
+
+    <br />
+    <hr />
+    <br />
+
+    <h3>Actualizar persona por cédula</h3>
+    <form asp-action="Edit" method="get">
+        <div class="mb-3">
+            <label for="cedula">Cedula</label>
+            <input id="cedula" name="cedula" type="number" placeholder="Por favor busque antes la persona para asegurarse" />
+        </div>
+        <button type="submit" class="btn btn-success">Actualizar</button>
+        <a class="btn btn-secondary" asp-action="Index">Limpiar</a>
+    </form>
 }

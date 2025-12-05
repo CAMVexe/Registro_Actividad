@@ -1,6 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Registro_Actividad.Models;
-using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace Registro_Actividad.Controllers
 {
@@ -36,6 +35,8 @@ namespace Registro_Actividad.Controllers
             return RedirectToAction(nameof(Index));
         }
 
+        [HttpPost]
+        [ValidateAntiForgeryToken]
         public IActionResult BuscarN(string nombre)
         {
             var resultado = _context.Personas.Where(p => p.Nombre.Contains(nombre)).ToList();
@@ -46,9 +47,10 @@ namespace Registro_Actividad.Controllers
                 return RedirectToAction(nameof(Index));
             }
 
-                return View("Index", resultado);
+            return View("Index", resultado);
         }
 
+        [HttpPost]
         public IActionResult BuscarE(int edad)
         {
             var match = _context.Personas.Where(p => p.Edad == edad).ToList();
@@ -62,6 +64,7 @@ namespace Registro_Actividad.Controllers
             return View("Index", match);
         }
 
+        [HttpPost]
         public IActionResult Delete(int cedula)
         {
             var persona = _context.Personas.Find(cedula);
@@ -76,6 +79,44 @@ namespace Registro_Actividad.Controllers
             _context.SaveChanges();
 
             TempData["Mensaje"] = $"Persona con cédula {cedula} eliminada correctamente.";
+            return RedirectToAction(nameof(Index));
+        }
+
+        // GET: mostrar el formulario de edición
+        [HttpGet]
+        public IActionResult Edit(int cedula)
+        {
+            var current = _context.Personas.Find(cedula);
+            if (current == null)
+            {
+                TempData["Mensaje"] = $"No se encontró la persona con cédula {cedula}.";
+                return RedirectToAction(nameof(Index));
+            }
+
+            return View(current);
+        }
+
+        // POST: guardar los cambios enviados desde la vista Edit
+        [HttpPost]
+        public IActionResult Edit(Persona model)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View(model);
+            }
+
+            var existing = _context.Personas.Find(model.Cedula);
+            if (existing == null)
+            {
+                TempData["Mensaje"] = $"No se encontró la persona con cédula {model.Cedula}.";
+                return RedirectToAction(nameof(Index));
+            }
+
+            // Actualiza los valores y guarda
+            _context.Entry(existing).CurrentValues.SetValues(model);
+            _context.SaveChanges();
+
+            TempData["Mensaje"] = $"Persona '{model.Nombre}' actualizada correctamente.";
             return RedirectToAction(nameof(Index));
         }
     }

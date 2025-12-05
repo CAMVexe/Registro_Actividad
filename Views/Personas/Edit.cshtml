@@ -1,0 +1,58 @@
+﻿@model Registro_Actividad.Models.Persona
+
+@{
+    ViewData["Title"] = "Editar persona";
+}
+
+<h1>@ViewData["Title"]</h1>
+
+<form asp-action="Edit" method="post">
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+    @* cedula *@
+    <div class="mb-3">
+        <label asp-for="Cedula" class="form-label"></label>
+        <input asp-for="Cedula" class="form-control" readonly />
+        <span asp-validation-for="Cedula" class="text-danger"></span>
+    </div>
+
+    @* nombre *@
+    <div class="mb-3">
+        <label asp-for="Nombre" class="form-label"></label>
+        <input asp-for="Nombre" class="form-control" />
+        <span asp-validation-for="Nombre" class="text-danger"></span>
+    </div>
+
+    @* apellidos *@
+    <div class="mb-3">
+        <label asp-for="Apellidos" class="form-label"></label>
+        <input asp-for="Apellidos" class="form-control" />
+        <span asp-validation-for="Apellidos" class="text-danger"></span>
+    </div>
+
+    @* edad *@
+    <div class="mb-3">
+        <label asp-for="Edad" class="form-label"></label>
+        <input asp-for="Edad" class="form-control" type="number" />
+        <span asp-validation-for="Edad" class="text-danger"></span>
+    </div>
+
+    @* telefono *@
+    <div class="mb-3">
+        <label asp-for="Telefono" class="form-label"></label>
+        <input asp-for="Telefono" class="form-control" type="number" />
+        <span asp-validation-for="Telefono" class="text-danger"></span>
+    </div>
+
+    @* email *@
+    <div class="mb-3">
+        <label asp-for="Email" class="form-label"></label>
+        <input asp-for="Email" class="form-control" />
+        <span asp-validation-for="Email" class="text-danger"></span>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Guardar</button>
+    <a asp-action="Index" class="btn btn-secondary">Cancelar</a>
+</form>
+
+
